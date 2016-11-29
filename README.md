@@ -4,7 +4,7 @@
 很多app用到了这种html元素效果，写了个demo
 效果如下：
 
- ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/1.gig?raw=true)
+ ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/1.gif?raw=true)
  
  使用方法：
  
@@ -15,7 +15,12 @@
      * columns：行数
      * data：数据
      */
-    [v1 wzb_drawListWithRect:v1.bounds line:4 columns:3 datas:@[@"", @"语文", @"数学", @"英语", @"王晓明", @"100.5", @"128", @"95", @"李小华", @"100.5", @"128", @"95", @"张爱奇", @"100.5", @"128", @"95"]];```
+    [v1 wzb_drawListWithRect:v1.bounds line:4 columns:3 datas:@[@"", @"语文", @"数学", @"英语", @"王晓明", @"100.5", @"128", @"95", @"李小华", @"100.5", @"128", @"95", @"张爱奇", @"100.5", @"128", @"95"]];
+    
+    
+```
+
+
 >参数值说明一下，direction代表方向，是一个位移枚举，如果想让tableView顶部渐变，则此值为WZBTableViewGradualDirectionTop，如果为底部渐变，则此值为WZBTableViewGradualDirectionBottom，如果上下都要渐变，则需要WZBTableViewGradualDirectionTop | WZBTableViewGradualDirectionBottom。gradualValue代表渐变范围值，值的范围为0-1，如果想让顶部20%渐变，此值为@(0.2)。如果想顶部底部都有20%渐变，此值为@[@(0.2), @(0.2)]。
 
 ```
@@ -75,6 +80,9 @@
  * lineWidth：线宽
  */
 - (void)wzb_drawLineWithFrame:(CGRect)frame lineType:(WZBLineType)lineType color:(UIColor *)color lineWidth:(CGFloat)lineWidth;
+
+
+
 ```
 >.h文件中提供了这些方法，用法看注释即可，getLabelWithIndex：方法是得到第index个格子，比如你有10个格子，[view getLabelWithIndex:0];是得到第一个格子，可以对其进行任何操作，比如
 比如比如我在第三个表格中拿到右边三个label，添加单击手势进行跳转
@@ -200,7 +208,9 @@
     [self.layer addSublayer:lineLayer];
 }
 
+
 ```
+
 
 最终效果是这样：
  ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/0.png?raw=true)
