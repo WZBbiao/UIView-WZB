@@ -38,8 +38,12 @@
     CGFloat h = (1.0) * rect.size.height / columns;
     NSInteger newLine = 0;
     for (NSInteger i = 0; i < columns; i++) {
+        
+        // 判断合并单元格
         if (lineInfo) {
             for (NSInteger a = 0; a < lineInfo.allKeys.count; a++) {
+                
+                // 新的列数
                 NSInteger newColumn = [lineInfo.allKeys[a] integerValue];
                 if (i == newColumn) {
                     newLine = [lineInfo[lineInfo.allKeys[a]] integerValue];
@@ -50,6 +54,8 @@
         } else {
             newLine = line;
         }
+        
+        
         for (NSInteger j = 0; j < newLine; j++) {
             
             // 线宽
@@ -59,26 +65,34 @@
             // 画线
             [self wzb_drawRectWithRect:frame];
             
+            // 创建label
             UILabel *label = [[UILabel alloc] initWithFrame:frame];
+            
+            // 文字居中
             label.textAlignment = NSTextAlignmentCenter;
             [self addSubview:label];
             
-            // 文字颜色
+            // 判断文字颜色
             UIColor *textColor = [colorInfo objectForKey:[NSString stringWithFormat:@"%zd", index]];
             if (!textColor) {
                 textColor = [UIColor grayColor];
             }
             label.textColor = textColor;
             
-            // 背景颜色
+            // 判断背景颜色
             UIColor *backgroundColor = [backgroundColorInfo objectForKey:[NSString stringWithFormat:@"%zd", index]];
             if (!backgroundColor) {
                 backgroundColor = [UIColor clearColor];
             }
             label.backgroundColor = backgroundColor;
             
+            // 字体大小
             label.font = [UIFont systemFontOfSize:13];
+            
+            // label文字
             label.text = datas[index];
+            
+            // label的tag值
             label.tag = WZBTag + index;
             index++;
         }
@@ -105,16 +119,34 @@
 }
 
 - (void)wzb_drawLineWithFrame:(CGRect)frame lineType:(WZBLineType)lineType color:(UIColor *)color lineWidth:(CGFloat)lineWidth {
+    
+    // 创建贝塞尔曲线
     UIBezierPath *linePath = [[UIBezierPath alloc] init];
+    
+    // 线宽
     linePath.lineWidth = lineWidth;
+    
+    // 起点
     [linePath moveToPoint:CGPointMake(0, 0)];
+    
+    // 重点：判断是水平方向还是垂直方向
     [linePath addLineToPoint: lineType == WZBLineHorizontal ? CGPointMake(frame.size.width, 0) : CGPointMake(0, frame.size.height)];
     
+    // 创建CAShapeLayer
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    
+    // 颜色
     lineLayer.strokeColor = color.CGColor;
+    // 宽度
     lineLayer.lineWidth = lineWidth;
+    
+    // frame
     lineLayer.frame = frame;
+    
+    // 路径
     lineLayer.path = linePath.CGPath;
+    
+    // 添加到layer上
     [self.layer addSublayer:lineLayer];
 }
 
