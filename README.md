@@ -1,13 +1,16 @@
 # UIView-WZB
 一行代码画一个表格，UIView分类，可以很简单的画excel表格
 
+#####1、效果:
 很多app用到了这种html元素效果，写了个demo
 效果如下：
 
  ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/1.gif?raw=true)
  
- 使用方法：
- 
+  #####2、使用方法：
+
+只需要一行代码 ，可以自定义文字颜色、背景颜色、合并单元格、点击事件等操作
+
 ``` 
 /**
      * 创建一个表格
@@ -20,8 +23,6 @@
     
 ```
 
-
->参数值说明一下，direction代表方向，是一个位移枚举，如果想让tableView顶部渐变，则此值为WZBTableViewGradualDirectionTop，如果为底部渐变，则此值为WZBTableViewGradualDirectionBottom，如果上下都要渐变，则需要WZBTableViewGradualDirectionTop | WZBTableViewGradualDirectionBottom。gradualValue代表渐变范围值，值的范围为0-1，如果想让顶部20%渐变，此值为@(0.2)。如果想顶部底部都有20%渐变，此值为@[@(0.2), @(0.2)]。
 
 ```
 /**
@@ -84,11 +85,10 @@
 
 
 ```
->.h文件中提供了这些方法，用法看注释即可，getLabelWithIndex：方法是得到第index个格子，比如你有10个格子，[view getLabelWithIndex:0];是得到第一个格子，可以对其进行任何操作，比如
-比如比如我在第三个表格中拿到右边三个label，添加单击手势进行跳转
+>.h文件中提供了这些方法，用法看注释即可，getLabelWithIndex：方法是得到第index个格子，比如你有10个格子，[view getLabelWithIndex:0];是得到第一个格子，可以对其进行任何操作，比如我在第三个表格中拿到右边三个label，添加单击手势进行跳转
 
 
-实现原理：
+ #####3、实现大致原理：
 
 ```
 
@@ -171,7 +171,7 @@
 
 ```
 
->这是核心代码，其中做了合并单元格、文字颜色、背景颜色、等判断。画线是用的贝塞尔曲线和CAShapeLayer，代码在下边，每个单元格里都创建了label显示文字
+>这是核心代码，其中做了合并单元格、文字颜色、背景颜色、等判断。画线是用的贝塞尔曲线和CAShapeLayer，代码在下边，每个单元格里都创建了label显示文字。我还提供了方法画一条直线，相信项目中很多页面某些位置需要画一条直线， `- (void)wzb_drawLineWithFrame:(CGRect)frame lineType:(WZBLineType)lineType color:(UIColor *)color lineWidth:(CGFloat)lineWidth`这个方法能够很方便的实现这一需求
 
 
 ```
@@ -212,9 +212,15 @@
 ```
 
 
+下边画了一下随机颜色的线条，最终效果是这样：
+
+ ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/0.png?raw=true)
+
+
 最终效果是这样：
 
  ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/0.png?raw=true)
+ 
 
  怎么样，您学会使用了吗？
 
