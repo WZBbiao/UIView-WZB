@@ -216,10 +216,6 @@
 
  ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/0.png?raw=true)
 
-
-最终效果是这样：
-
- ![image](https://github.com/WZBbiao/UIView-WZB/blob/master/0.png?raw=true)
  
 
  怎么样，您学会使用了吗？
