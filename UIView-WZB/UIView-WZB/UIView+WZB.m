@@ -2,8 +2,8 @@
 //  UIView+WZB.m
 //  WZBListView
 //
-//  Created by 孙航 on 16/6/13.
-//  Copyright © 2016年 江苏银丰. All rights reserved.
+//  Created by 王振标 on 16/6/13.
+//  Copyright © 2016年 王振标. All rights reserved.
 //
 
 #import "UIView+WZB.h"
@@ -14,45 +14,87 @@
 #define WZBTag 155158
 
 @implementation UIView (WZB)
-- (void)wzb_drawListWithRect:(CGRect)rect line:(NSInteger)line columns:(NSInteger)columns datas:(NSArray *)datas colorInfo:(NSDictionary *)colorInfo{
-    [self wzb_drawListWithRect:rect line:line columns:columns datas:datas colorInfo:colorInfo lineInfo:nil];
+
+/**
+ * 创建一个表格
+ * columns：列数
+ * rows：行数
+ * data：数据
+ */
+- (void)wzb_drawListWithRect:(CGRect)rect columns:(NSInteger)columns rows:(NSInteger)rows datas:(NSArray *)datas
+{
+    [self wzb_drawListWithRect:rect columns:columns rows:rows datas:datas colorInfo:nil];
 }
 
-- (void)wzb_drawListWithRect:(CGRect)rect line:(NSInteger)line columns:(NSInteger)columns datas:(NSArray *)datas colorInfo:(NSDictionary *)colorInfo lineInfo:(NSDictionary *)lineInfo {
-    [self wzb_drawListWithRect:rect line:line columns:columns datas:datas colorInfo:colorInfo lineInfo:lineInfo backgroundColorInfo:nil];
+/**
+ * 创建一个表格
+ * columns：列数
+ * rows：行数
+ * data：数据
+ * lineInfo：行信息，传入格式：@{@"0" : @"3"}意味着第一行创建3个格子
+ */
+- (void)wzb_drawListWithRect:(CGRect)rect columns:(NSInteger)columns rows:(NSInteger)rows datas:(NSArray *)datas columnsInfo:(NSDictionary *)columnsInfo
+{
+    [self wzb_drawListWithRect:rect columns:columns rows:rows datas:datas colorInfo:nil columnsInfo:columnsInfo];
 }
 
 /**
  * 创建一个表格
  * line：列数
- * columns：行数
+ * rows：行数
  * data：数据
  * colorInfo：颜色信息，传入格式：@{@"0" : [UIColor redColor]}意味着第一个格子文字将会变成红色
- * lineInfo：行信息，传入格式：@{@"0" : @"3"}意味着第一行创建3个格子
+ */
+- (void)wzb_drawListWithRect:(CGRect)rect columns:(NSInteger)columns rows:(NSInteger)rows datas:(NSArray *)datas colorInfo:(NSDictionary *)colorInfo
+{
+    [self wzb_drawListWithRect:rect columns:columns rows:rows datas:datas colorInfo:colorInfo columnsInfo:nil];
+}
+
+/**
+ * 创建一个表格
+ * columns：列数
+ * rows：行数
+ * data：数据
+ * colorInfo：颜色信息，传入格式：@{@"0" : [UIColor redColor]}意味着第一个格子文字将会变成红色
+ * columnsInfo：行信息，传入格式：@{@"0" : @"3"}意味着第一行创建3个格子
+ */
+- (void)wzb_drawListWithRect:(CGRect)rect columns:(NSInteger)columns rows:(NSInteger)rows datas:(NSArray *)datas colorInfo:(NSDictionary *)colorInfo columnsInfo:(NSDictionary *)columnsInfo
+{
+    [self wzb_drawListWithRect:rect columns:columns rows:rows datas:datas colorInfo:colorInfo columnsInfo:columnsInfo backgroundColorInfo:nil];
+}
+
+/**
+ * 创建一个表格
+ * columns：列数
+ * rows：行数
+ * data：数据
+ * colorInfo：颜色信息，传入格式：@{@"0" : [UIColor redColor]}意味着第一个格子文字将会变成红色
+ * columnsInfo：行信息，传入格式：@{@"0" : @"3"}意味着第一行创建3个格子
  * backgroundColorInfo：行信息，传入格式：@{@"0" : [UIColor redColor]}意味着第一个格子背景颜色变成红色
  */
-- (void)wzb_drawListWithRect:(CGRect)rect line:(NSInteger)line columns:(NSInteger)columns datas:(NSArray *)datas colorInfo:(NSDictionary *)colorInfo lineInfo:(NSDictionary *)lineInfo backgroundColorInfo:(NSDictionary *)backgroundColorInfo {
+- (void)wzb_drawListWithRect:(CGRect)rect columns:(NSInteger)columns rows:(NSInteger)rows datas:(NSArray *)datas colorInfo:(NSDictionary *)colorInfo columnsInfo:(NSDictionary *)columnsInfo backgroundColorInfo:(NSDictionary *)backgroundColorInfo
+{
     NSInteger index = 0;
     CGFloat x = rect.origin.x;
     CGFloat y = rect.origin.y;
-    CGFloat h = (1.0) * rect.size.height / columns;
+    CGFloat h = (1.0) * rect.size.height / rows;
     NSInteger newLine = 0;
-    for (NSInteger i = 0; i < columns; i++) {
+    for (NSInteger i = 0; i < rows; i++) {
         
         // 判断合并单元格
-        if (lineInfo) {
-            for (NSInteger a = 0; a < lineInfo.allKeys.count; a++) {
+        if (columnsInfo) {
+            for (NSInteger a = 0; a < columnsInfo.allKeys.count; a++) {
                 
                 // 新的列数
-                NSInteger newColumn = [lineInfo.allKeys[a] integerValue];
+                NSInteger newColumn = [columnsInfo.allKeys[a] integerValue];
                 if (i == newColumn) {
-                    newLine = [lineInfo[lineInfo.allKeys[a]] integerValue];
+                    newLine = [columnsInfo[columnsInfo.allKeys[a]] integerValue];
                 } else {
-                    newLine = line;
+                    newLine = columns;
                 }
             }
         } else {
-            newLine = line;
+            newLine = columns;
         }
         
         
@@ -156,27 +198,6 @@
 
 - (void)wzb_drawLineWithFrame:(CGRect)frame type:(NSInteger)type {
     [self wzb_drawLineWithFrame:frame type:type color:[UIColor blackColor]];
-}
-
-/**
- * 创建一个表格
- * line：列数
- * columns：行数
- * data：数据
- */
-- (void)wzb_drawListWithRect:(CGRect)rect line:(NSInteger)line columns:(NSInteger)columns datas:(NSArray *)datas {
-    [self wzb_drawListWithRect:rect line:line columns:columns datas:datas colorInfo:nil];
-}
-
-/**
- * 创建一个表格
- * line：列数
- * columns：行数
- * data：数据
- * lineInfo：行信息，传入格式：@{@"0" : @"3"}意味着第一行创建3个格子
- */
-- (void)wzb_drawListWithRect:(CGRect)rect line:(NSInteger)line columns:(NSInteger)columns datas:(NSArray *)datas lineInfo:(NSDictionary *)lineInfo {
-    [self wzb_drawListWithRect:rect line:line columns:columns datas:datas colorInfo:nil lineInfo:lineInfo];
 }
 
 // 根据tag拿到对应的label
