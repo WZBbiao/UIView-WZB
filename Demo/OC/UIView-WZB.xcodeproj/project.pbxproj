@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31E44DE02A614D95008F2E53 /* UIView+WZB.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E44DDF2A614D95008F2E53 /* UIView+WZB.m */; };
 		D011CEBD1DEC67D600BB6218 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D011CEBC1DEC67D600BB6218 /* main.m */; };
 		D011CEC01DEC67D600BB6218 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D011CEBF1DEC67D600BB6218 /* AppDelegate.m */; };
 		D011CEC31DEC67D600BB6218 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D011CEC21DEC67D600BB6218 /* ViewController.m */; };
@@ -15,7 +16,6 @@
 		D011CECB1DEC67D600BB6218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D011CEC91DEC67D600BB6218 /* LaunchScreen.storyboard */; };
 		D011CED61DEC67D600BB6218 /* UIView_WZBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D011CED51DEC67D600BB6218 /* UIView_WZBTests.m */; };
 		D011CEE11DEC67D600BB6218 /* UIView_WZBUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D011CEE01DEC67D600BB6218 /* UIView_WZBUITests.m */; };
-		D011CEF11DEC74CD00BB6218 /* UIView+WZB.m in Sources */ = {isa = PBXBuildFile; fileRef = D011CEF01DEC74CD00BB6218 /* UIView+WZB.m */; };
 		D01CB6551DEDD4B20050ED06 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D01CB6531DEDD4B20050ED06 /* DetailViewController.m */; };
 		D01CB6561DEDD4B20050ED06 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01CB6541DEDD4B20050ED06 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
@@ -38,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31E44DDE2A614D95008F2E53 /* UIView+WZB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WZB.h"; sourceTree = "<group>"; };
+		31E44DDF2A614D95008F2E53 /* UIView+WZB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WZB.m"; sourceTree = "<group>"; };
 		D011CEB81DEC67D600BB6218 /* UIView-WZB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIView-WZB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D011CEBC1DEC67D600BB6218 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D011CEBE1DEC67D600BB6218 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -54,8 +56,6 @@
 		D011CEDC1DEC67D600BB6218 /* UIView-WZBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UIView-WZBUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D011CEE01DEC67D600BB6218 /* UIView_WZBUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIView_WZBUITests.m; sourceTree = "<group>"; };
 		D011CEE21DEC67D600BB6218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D011CEEF1DEC74CD00BB6218 /* UIView+WZB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WZB.h"; sourceTree = "<group>"; };
-		D011CEF01DEC74CD00BB6218 /* UIView+WZB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WZB.m"; sourceTree = "<group>"; };
 		D01CB6521DEDD4B20050ED06 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		D01CB6531DEDD4B20050ED06 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		D01CB6541DEDD4B20050ED06 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -86,6 +86,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31E44DDD2A614D95008F2E53 /* UIView-WZB */ = {
+			isa = PBXGroup;
+			children = (
+				31E44DDE2A614D95008F2E53 /* UIView+WZB.h */,
+				31E44DDF2A614D95008F2E53 /* UIView+WZB.m */,
+			);
+			name = "UIView-WZB";
+			path = "../../../Source/OC/UIView-WZB";
+			sourceTree = "<group>";
+		};
 		D011CEAF1DEC67D600BB6218 = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +119,7 @@
 		D011CEBA1DEC67D600BB6218 /* UIView-WZB */ = {
 			isa = PBXGroup;
 			children = (
-				D011CEEE1DEC67ED00BB6218 /* UIView-WZB */,
+				31E44DDD2A614D95008F2E53 /* UIView-WZB */,
 				D011CEBE1DEC67D600BB6218 /* AppDelegate.h */,
 				D011CEBF1DEC67D600BB6218 /* AppDelegate.m */,
 				D011CEC11DEC67D600BB6218 /* ViewController.h */,
@@ -150,15 +160,6 @@
 				D011CEE21DEC67D600BB6218 /* Info.plist */,
 			);
 			path = "UIView-WZBUITests";
-			sourceTree = "<group>";
-		};
-		D011CEEE1DEC67ED00BB6218 /* UIView-WZB */ = {
-			isa = PBXGroup;
-			children = (
-				D011CEEF1DEC74CD00BB6218 /* UIView+WZB.h */,
-				D011CEF01DEC74CD00BB6218 /* UIView+WZB.m */,
-			);
-			path = "UIView-WZB";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +251,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -299,9 +301,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D01CB6551DEDD4B20050ED06 /* DetailViewController.m in Sources */,
+				31E44DE02A614D95008F2E53 /* UIView+WZB.m in Sources */,
 				D011CEC31DEC67D600BB6218 /* ViewController.m in Sources */,
 				D011CEC01DEC67D600BB6218 /* AppDelegate.m in Sources */,
-				D011CEF11DEC74CD00BB6218 /* UIView+WZB.m in Sources */,
 				D011CEBD1DEC67D600BB6218 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
