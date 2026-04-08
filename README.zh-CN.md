@@ -1,28 +1,27 @@
 # UIView-WZB
 
-[简体中文](./README.zh-CN.md)
+[English](./README.md)
 
-A Swift rewrite of `UIView-WZB` for drawing lightweight grid layouts and custom separator lines on top of any `UIView`.
+`UIView-WZB` 的 Swift 重写版，用来在任意 `UIView` 上快速绘制表格式网格和自定义线条。
 
-## Features
+## 功能
 
-- Draw table-style grids with a single API call
-- Override column counts on specific rows
-- Customize text color and cell background color by cell index
-- Retrieve any rendered cell label for gesture handling or extra styling
-- Draw standalone horizontal and vertical lines
+- 一行代码绘制表格
+- 支持某些行使用不同列数
+- 支持按单元格索引设置文字颜色和背景色
+- 支持通过索引取回某个格子的 `UILabel`
+- 支持单独绘制横线和竖线
 
-## Preview
+## 预览
 
 ![Demo](https://github.com/WZBbiao/UIView-WZB/blob/master/1.gif?raw=true)
 
-## Requirements
+## 环境要求
 
 - iOS 11.0+
 - Swift 5.0+
-- Xcode 15 or later recommended
 
-## Installation
+## 安装
 
 ### Swift Package Manager
 
@@ -30,7 +29,7 @@ A Swift rewrite of `UIView-WZB` for drawing lightweight grid layouts and custom 
 .package(url: "https://github.com/WZBbiao/UIView-WZB.git", from: "2.0.0")
 ```
 
-Add the `UIViewWZB` product to your target dependencies.
+然后在 target 中添加 `UIViewWZB` 依赖。
 
 ### CocoaPods
 
@@ -38,7 +37,7 @@ Add the `UIViewWZB` product to your target dependencies.
 pod "UIView-WZB", "~> 2.0"
 ```
 
-## Quick Start
+## 快速开始
 
 ```swift
 import UIKit
@@ -51,15 +50,15 @@ tableView.wzb_drawList(
     columns: 4,
     rows: 4,
     datas: [
-        "", "Chinese", "Math", "English",
-        "Wang Xiaoming", "100.5", "128", "95",
-        "Li Xiaohua", "96.0", "105", "89",
-        "Zhang Aiqi", "88.0", "118", "93"
+        "", "语文", "数学", "英语",
+        "王晓明", "100.5", "128", "95",
+        "李小华", "96.0", "105", "89",
+        "张爱奇", "88.0", "118", "93"
     ]
 )
 ```
 
-## API
+## 主要 API
 
 ```swift
 func wzb_drawList(with rect: CGRect, columns: Int, rows: Int, datas: [Any])
@@ -99,16 +98,16 @@ func wzb_removeGrid()
 
 ## Demo
 
-The Swift demo app lives in `Demo/Swift/UIView-WZB` and includes:
+Swift demo 位于 `Demo/Swift/UIView-WZB`，包含：
 
-- A basic score table
-- A merged-row sales table with tap interaction
-- A decorative line canvas
+- 基础成绩表
+- 支持点击交互的合并表头销售表
+- 随机彩色线条示例
 
-## Legacy
+## 兼容说明
 
-The original Objective-C implementation is still kept under `Source/OC` and `Demo/OC` for migration reference.
+旧的 Objective-C 实现仍然保留在 `Source/OC` 和 `Demo/OC` 目录，方便迁移参考。
 
 ## License
 
-`UIView-WZB` is available under the MIT license.
+`UIView-WZB` 使用 MIT License。
