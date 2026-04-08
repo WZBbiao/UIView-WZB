@@ -68,6 +68,10 @@ final class ViewController: UIViewController {
         contentStack.addArrangedSubview(makeBasicTableDemo())
         contentStack.addArrangedSubview(makeSectionTitle("Merged Rows and Interaction"))
         contentStack.addArrangedSubview(makeMergedTableDemo())
+        contentStack.addArrangedSubview(makeSectionTitle("Variable Row Heights and Column Widths"))
+        contentStack.addArrangedSubview(makeUnevenGridDemo())
+        contentStack.addArrangedSubview(makeSectionTitle("Scrollable Grid"))
+        contentStack.addArrangedSubview(makeScrollableGridDemo())
         contentStack.addArrangedSubview(makeSectionTitle("Decorative Lines"))
         contentStack.addArrangedSubview(makeLinesDemo())
     }
@@ -194,6 +198,77 @@ final class ViewController: UIViewController {
                 lineWidth: 3
             )
         }
+
+        return card
+    }
+
+    private func makeUnevenGridDemo() -> UIView {
+        let card = makeCard(height: 230)
+        let tableView = UIView(frame: CGRect(x: 16, y: 16, width: view.bounds.width - 64, height: 198))
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        card.addSubview(tableView)
+
+        tableView.wzb_drawList(
+            with: tableView.bounds,
+            defaultColumns: 3,
+            rowHeights: [0.9, 1.3, 1.1, 1.7],
+            datas: [
+                "Quarter", "Revenue", "Trend",
+                "Q1", "218.4", "Stable",
+                "Q2", "325.1", "Up",
+                "Q3", "410.8", "Peak"
+            ],
+            colorInfo: [
+                2: .systemBlue,
+                5: .systemGreen,
+                8: .systemOrange,
+                11: .systemRed
+            ],
+            columnWidthInfo: [
+                0: [1.4, 1, 0.8],
+                1: [1.2, 1, 0.8],
+                2: [1.2, 1, 0.8],
+                3: [1.2, 1, 0.8]
+            ],
+            backgroundColorInfo: [
+                0: demoHeaderBackgroundColor(),
+                1: demoHeaderBackgroundColor(),
+                2: demoHeaderBackgroundColor()
+            ]
+        )
+
+        return card
+    }
+
+    private func makeScrollableGridDemo() -> UIView {
+        let card = makeCard(height: 250)
+        let scrollDemo = UIScrollView(frame: CGRect(x: 16, y: 16, width: view.bounds.width - 64, height: 218))
+        scrollDemo.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        scrollDemo.layer.cornerRadius = 14
+        scrollDemo.backgroundColor = .white.withAlphaComponent(0.45)
+        card.addSubview(scrollDemo)
+
+        let header = ["Month", "North", "South", "East", "West", "Total"]
+        let rows = (1 ... 12).flatMap { month in
+            [
+                "\(month)",
+                "\(Int.random(in: 80 ... 140))",
+                "\(Int.random(in: 90 ... 160))",
+                "\(Int.random(in: 70 ... 135))",
+                "\(Int.random(in: 95 ... 180))",
+                "\(Int.random(in: 400 ... 650))"
+            ]
+        }
+
+        scrollDemo.wzb_drawScrollableList(
+            origin: CGPoint(x: 0, y: 0),
+            cellSize: CGSize(width: 92, height: 44),
+            columns: 6,
+            rows: 13,
+            datas: header + rows,
+            colorInfo: [5: .systemIndigo],
+            backgroundColorInfo: Dictionary(uniqueKeysWithValues: (0 ..< 6).map { ($0, demoHeaderBackgroundColor()) })
+        )
 
         return card
     }

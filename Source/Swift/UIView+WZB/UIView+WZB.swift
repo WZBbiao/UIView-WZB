@@ -25,8 +25,13 @@ private final class WZBGridStorage: NSObject {
     var lineLayers: [CAShapeLayer] = []
 }
 
+private final class WZBScrollableGridStorage: NSObject {
+    weak var containerView: UIView?
+}
+
 private enum WZBAssociatedKeys {
     static var gridStorage: UInt8 = 0
+    static var scrollableGridStorage: UInt8 = 0
 }
 
 private extension UIView {
@@ -64,6 +69,45 @@ private extension UIView {
         max(columnsInfo?[row] ?? defaultColumns, 1)
     }
 
+    func wzb_resolvedRowHeights(rows: Int, rowHeights: [CGFloat]?, totalHeight: CGFloat) -> [CGFloat] {
+        guard let rowHeights, rowHeights.count == rows else {
+            return Array(repeating: totalHeight / CGFloat(rows), count: rows)
+        }
+
+        let sanitizedHeights = rowHeights.map { max($0, 1) }
+        let total = sanitizedHeights.reduce(0, +)
+        guard total > 0 else {
+            return Array(repeating: totalHeight / CGFloat(rows), count: rows)
+        }
+
+        return sanitizedHeights.map { totalHeight * ($0 / total) }
+    }
+
+    func wzb_resolvedColumnWidths(
+        defaultColumns: Int,
+        row: Int,
+        columnsInfo: [Int: Int]?,
+        columnWidthInfo: [Int: [CGFloat]]?,
+        totalWidth: CGFloat
+    ) -> [CGFloat] {
+        let currentColumns = wzb_resolvedColumns(defaultColumns: defaultColumns, row: row, columnsInfo: columnsInfo)
+
+        guard
+            let widthWeights = columnWidthInfo?[row],
+            widthWeights.count == currentColumns
+        else {
+            return Array(repeating: totalWidth / CGFloat(currentColumns), count: currentColumns)
+        }
+
+        let sanitizedWeights = widthWeights.map { max($0, 1) }
+        let total = sanitizedWeights.reduce(0, +)
+        guard total > 0 else {
+            return Array(repeating: totalWidth / CGFloat(currentColumns), count: currentColumns)
+        }
+
+        return sanitizedWeights.map { totalWidth * ($0 / total) }
+    }
+
     func wzb_makeLabel(frame: CGRect, text: Any?, textColor: UIColor, backgroundColor: UIColor) -> UILabel {
         let label = UILabel(frame: frame.integral)
         label.textAlignment = .center
@@ -85,6 +129,62 @@ private extension UIView {
     func wzb_storeLineLayer(_ layer: CAShapeLayer) {
         wzb_gridStorage.lineLayers.append(layer)
         self.layer.addSublayer(layer)
+    }
+
+    func wzb_drawList(
+        with rect: CGRect,
+        defaultColumns: Int,
+        rows: Int,
+        datas: [Any],
+        colorInfo: [Int: UIColor]?,
+        columnsInfo: [Int: Int]?,
+        columnWidthInfo: [Int: [CGFloat]]?,
+        rowHeights: [CGFloat]?,
+        backgroundColorInfo: [Int: UIColor]?
+    ) {
+        guard defaultColumns > 0, rows > 0, rect.width > 0, rect.height > 0 else { return }
+
+        wzb_clearGridArtifacts()
+
+        let resolvedRowHeights = wzb_resolvedRowHeights(rows: rows, rowHeights: rowHeights, totalHeight: rect.height)
+        var dataIndex = 0
+        var currentY = rect.minY
+
+        for row in 0 ..< rows {
+            let currentRowHeight = resolvedRowHeights[row]
+            let columnWidths = wzb_resolvedColumnWidths(
+                defaultColumns: defaultColumns,
+                row: row,
+                columnsInfo: columnsInfo,
+                columnWidthInfo: columnWidthInfo,
+                totalWidth: rect.width
+            )
+
+            var currentX = rect.minX
+            for columnWidth in columnWidths {
+                let cellFrame = CGRect(
+                    x: currentX,
+                    y: currentY,
+                    width: columnWidth,
+                    height: currentRowHeight
+                )
+
+                wzb_drawGridBorder(for: cellFrame)
+
+                let label = wzb_makeLabel(
+                    frame: cellFrame,
+                    text: dataIndex < datas.count ? datas[dataIndex] : nil,
+                    textColor: colorInfo?[dataIndex] ?? wzbDefaultTextColor(),
+                    backgroundColor: backgroundColorInfo?[dataIndex] ?? .clear
+                )
+
+                wzb_storeLabel(label)
+                dataIndex += 1
+                currentX += columnWidth
+            }
+
+            currentY += currentRowHeight
+        }
     }
 }
 
@@ -146,38 +246,40 @@ public extension UIView {
         columnsInfo: [Int: Int]?,
         backgroundColorInfo: [Int: UIColor]?
     ) {
-        guard columns > 0, rows > 0, rect.width > 0, rect.height > 0 else { return }
+        wzb_drawList(
+            with: rect,
+            defaultColumns: columns,
+            rows: rows,
+            datas: datas,
+            colorInfo: colorInfo,
+            columnsInfo: columnsInfo,
+            columnWidthInfo: nil,
+            rowHeights: nil,
+            backgroundColorInfo: backgroundColorInfo
+        )
+    }
 
-        wzb_clearGridArtifacts()
-
-        let rowHeight = rect.height / CGFloat(rows)
-        var dataIndex = 0
-
-        for row in 0 ..< rows {
-            let currentColumns = wzb_resolvedColumns(defaultColumns: columns, row: row, columnsInfo: columnsInfo)
-            let columnWidth = rect.width / CGFloat(currentColumns)
-
-            for column in 0 ..< currentColumns {
-                let cellFrame = CGRect(
-                    x: rect.minX + CGFloat(column) * columnWidth,
-                    y: rect.minY + CGFloat(row) * rowHeight,
-                    width: columnWidth,
-                    height: rowHeight
-                )
-
-                wzb_drawGridBorder(for: cellFrame)
-
-                let label = wzb_makeLabel(
-                    frame: cellFrame,
-                    text: dataIndex < datas.count ? datas[dataIndex] : nil,
-                    textColor: colorInfo?[dataIndex] ?? wzbDefaultTextColor(),
-                    backgroundColor: backgroundColorInfo?[dataIndex] ?? .clear
-                )
-
-                wzb_storeLabel(label)
-                dataIndex += 1
-            }
-        }
+    func wzb_drawList(
+        with rect: CGRect,
+        defaultColumns: Int,
+        rowHeights: [CGFloat],
+        datas: [Any],
+        colorInfo: [Int: UIColor]? = nil,
+        columnsInfo: [Int: Int]? = nil,
+        columnWidthInfo: [Int: [CGFloat]]? = nil,
+        backgroundColorInfo: [Int: UIColor]? = nil
+    ) {
+        wzb_drawList(
+            with: rect,
+            defaultColumns: defaultColumns,
+            rows: rowHeights.count,
+            datas: datas,
+            colorInfo: colorInfo,
+            columnsInfo: columnsInfo,
+            columnWidthInfo: columnWidthInfo,
+            rowHeights: rowHeights,
+            backgroundColorInfo: backgroundColorInfo
+        )
     }
 
     @objc(getLabelWithIndex:)
@@ -216,6 +318,67 @@ public extension UIView {
 
     func wzb_removeGrid() {
         wzb_clearGridArtifacts()
+    }
+}
+
+public extension UIScrollView {
+    @discardableResult
+    func wzb_drawScrollableList(
+        origin: CGPoint = .zero,
+        cellSize: CGSize,
+        columns: Int,
+        rows: Int,
+        datas: [Any],
+        colorInfo: [Int: UIColor]? = nil,
+        columnsInfo: [Int: Int]? = nil,
+        backgroundColorInfo: [Int: UIColor]? = nil
+    ) -> UIView {
+        let storage: WZBScrollableGridStorage
+        if let existing = objc_getAssociatedObject(self, &WZBAssociatedKeys.scrollableGridStorage) as? WZBScrollableGridStorage {
+            storage = existing
+        } else {
+            storage = WZBScrollableGridStorage()
+            objc_setAssociatedObject(
+                self,
+                &WZBAssociatedKeys.scrollableGridStorage,
+                storage,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
+        }
+
+        storage.containerView?.removeFromSuperview()
+
+        let resolvedColumnsInfo = columnsInfo ?? [:]
+        let contentWidth = (0 ..< rows)
+            .map { max(resolvedColumnsInfo[$0] ?? columns, 1) }
+            .map { CGFloat($0) * cellSize.width }
+            .max() ?? cellSize.width
+        let contentHeight = CGFloat(rows) * cellSize.height
+
+        let containerView = UIView(frame: CGRect(
+            x: origin.x,
+            y: origin.y,
+            width: contentWidth,
+            height: contentHeight
+        ))
+        addSubview(containerView)
+
+        containerView.wzb_drawList(
+            with: containerView.bounds,
+            columns: columns,
+            rows: rows,
+            datas: datas,
+            colorInfo: colorInfo,
+            columnsInfo: columnsInfo,
+            backgroundColorInfo: backgroundColorInfo
+        )
+
+        storage.containerView = containerView
+        contentSize = CGSize(
+            width: max(bounds.width, origin.x + contentWidth),
+            height: max(bounds.height, origin.y + contentHeight)
+        )
+        return containerView
     }
 }
 

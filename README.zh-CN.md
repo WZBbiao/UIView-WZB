@@ -8,7 +8,9 @@
 
 - 一行代码绘制表格
 - 支持某些行使用不同列数
+- 支持自定义行高和每一行的列宽比例
 - 支持按单元格索引设置文字颜色和背景色
+- 数据很多时可放进 `UIScrollView`，保持固定格子尺寸并滚动
 - 支持通过索引取回某个格子的 `UILabel`
 - 支持单独绘制横线和竖线
 
@@ -89,6 +91,28 @@ func wzb_drawList(
     backgroundColorInfo: [Int: UIColor]?
 )
 
+func wzb_drawList(
+    with rect: CGRect,
+    defaultColumns: Int,
+    rowHeights: [CGFloat],
+    datas: [Any],
+    colorInfo: [Int: UIColor]? = nil,
+    columnsInfo: [Int: Int]? = nil,
+    columnWidthInfo: [Int: [CGFloat]]? = nil,
+    backgroundColorInfo: [Int: UIColor]? = nil
+)
+
+func wzb_drawScrollableList(
+    origin: CGPoint = .zero,
+    cellSize: CGSize,
+    columns: Int,
+    rows: Int,
+    datas: [Any],
+    colorInfo: [Int: UIColor]? = nil,
+    columnsInfo: [Int: Int]? = nil,
+    backgroundColorInfo: [Int: UIColor]? = nil
+) -> UIView
+
 func getLabel(withIndex index: Int) -> UILabel?
 
 func wzb_drawLine(with frame: CGRect, lineType: WZBLineType, color: UIColor, lineWidth: CGFloat)
@@ -102,7 +126,18 @@ Swift demo 位于 `Demo/Swift/UIView-WZB`，包含：
 
 - 基础成绩表
 - 支持点击交互的合并表头销售表
+- 不等高、不等宽的网格示例
+- 大表格滚动示例
 - 随机彩色线条示例
+
+## 说明
+
+- `columns` 表示一行里默认有多少列。
+- `rows` 表示一共有多少行。
+- 某一行列数不同，用 `columnsInfo`。
+- 某一行列宽不等，用 `columnWidthInfo`。
+- 行高不等时，用 `rowHeights`。
+- 想保留固定 cell 尺寸并支持滚动时，用 `wzb_drawScrollableList`。
 
 ## 兼容说明
 

@@ -8,7 +8,9 @@ A Swift rewrite of `UIView-WZB` for drawing lightweight grid layouts and custom 
 
 - Draw table-style grids with a single API call
 - Override column counts on specific rows
+- Customize row heights and per-row column width ratios
 - Customize text color and cell background color by cell index
+- Render large data sets inside a `UIScrollView` without squeezing cells
 - Retrieve any rendered cell label for gesture handling or extra styling
 - Draw standalone horizontal and vertical lines
 
@@ -90,6 +92,28 @@ func wzb_drawList(
     backgroundColorInfo: [Int: UIColor]?
 )
 
+func wzb_drawList(
+    with rect: CGRect,
+    defaultColumns: Int,
+    rowHeights: [CGFloat],
+    datas: [Any],
+    colorInfo: [Int: UIColor]? = nil,
+    columnsInfo: [Int: Int]? = nil,
+    columnWidthInfo: [Int: [CGFloat]]? = nil,
+    backgroundColorInfo: [Int: UIColor]? = nil
+)
+
+func wzb_drawScrollableList(
+    origin: CGPoint = .zero,
+    cellSize: CGSize,
+    columns: Int,
+    rows: Int,
+    datas: [Any],
+    colorInfo: [Int: UIColor]? = nil,
+    columnsInfo: [Int: Int]? = nil,
+    backgroundColorInfo: [Int: UIColor]? = nil
+) -> UIView
+
 func getLabel(withIndex index: Int) -> UILabel?
 
 func wzb_drawLine(with frame: CGRect, lineType: WZBLineType, color: UIColor, lineWidth: CGFloat)
@@ -103,7 +127,17 @@ The Swift demo app lives in `Demo/Swift/UIView-WZB` and includes:
 
 - A basic score table
 - A merged-row sales table with tap interaction
+- A variable-size grid with uneven row heights and column widths
+- A scrollable large table demo
 - A decorative line canvas
+
+## Notes
+
+- `columns` always means the number of cells in one row.
+- `rows` always means the number of horizontal rows.
+- Use `columnsInfo` when a specific row should have a different number of cells.
+- Use `columnWidthInfo` when cells in the same row should not share equal width.
+- Use `wzb_drawScrollableList` when the grid should keep a fixed cell size and scroll instead of shrinking.
 
 ## Legacy
 
