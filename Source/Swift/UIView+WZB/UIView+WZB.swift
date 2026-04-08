@@ -26,7 +26,7 @@ private final class WZBGridStorage: NSObject {
 }
 
 private enum WZBAssociatedKeys {
-    static var gridStorage = "wzb_grid_storage"
+    static var gridStorage: UInt8 = 0
 }
 
 private extension UIView {
