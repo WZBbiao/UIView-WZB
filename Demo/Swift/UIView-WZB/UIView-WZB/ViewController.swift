@@ -546,6 +546,11 @@ final class ViewController: UIViewController {
         scrollDemo.layer.cornerRadius = 14
         scrollDemo.clipsToBounds = true
         scrollDemo.backgroundColor = .white.withAlphaComponent(0.45)
+        scrollDemo.alwaysBounceHorizontal = true
+        scrollDemo.alwaysBounceVertical = true
+        scrollDemo.showsHorizontalScrollIndicator = true
+        scrollDemo.showsVerticalScrollIndicator = true
+        scrollDemo.panGestureRecognizer.addTarget(self, action: #selector(handleScrollableGridPan(_:)))
         card.addSubview(scrollDemo)
 
         let header = ["Month", "North", "South", "East", "West", "Total"]
@@ -571,6 +576,17 @@ final class ViewController: UIViewController {
         )
 
         return card
+    }
+
+    @objc private func handleScrollableGridPan(_ gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .began, .changed:
+            scrollView.isScrollEnabled = false
+        case .cancelled, .ended, .failed:
+            scrollView.isScrollEnabled = true
+        default:
+            break
+        }
     }
 
     @objc private func showDetail() {
