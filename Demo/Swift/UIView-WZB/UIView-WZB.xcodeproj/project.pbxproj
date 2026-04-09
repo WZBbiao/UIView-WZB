@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31E44DEE2A614E47008F2E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E44DED2A614E47008F2E53 /* AppDelegate.swift */; };
 		1A5200012D00000100000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5200022D00000100000001 /* SceneDelegate.swift */; };
+		31E44DEE2A614E47008F2E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E44DED2A614E47008F2E53 /* AppDelegate.swift */; };
 		31E44DF22A614E47008F2E53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E44DF12A614E47008F2E53 /* ViewController.swift */; };
 		31E44DF52A614E47008F2E53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31E44DF32A614E47008F2E53 /* Main.storyboard */; };
 		31E44DF72A614E49008F2E53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31E44DF62A614E49008F2E53 /* Assets.xcassets */; };
 		31E44DFA2A614E49008F2E53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31E44DF82A614E49008F2E53 /* LaunchScreen.storyboard */; };
 		31E44E062A614EC3008F2E53 /* UIView+WZB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E44E052A614EC3008F2E53 /* UIView+WZB.swift */; };
+		8B397F22A7F0CC34063D5B1A /* Pods_UIView_WZB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3763E339A45A558972CEC0A0 /* Pods_UIView_WZB.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		31E44DEA2A614E47008F2E53 /* UIView-WZB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIView-WZB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AC9AEEB4466E3CD4E153699 /* Pods-UIView-WZB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIView-WZB.release.xcconfig"; path = "Target Support Files/Pods-UIView-WZB/Pods-UIView-WZB.release.xcconfig"; sourceTree = "<group>"; };
 		1A5200022D00000100000001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		31E44DEA2A614E47008F2E53 /* UIView-WZB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIView-WZB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31E44DED2A614E47008F2E53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31E44DF12A614E47008F2E53 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		31E44DF42A614E47008F2E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -26,6 +28,8 @@
 		31E44DF92A614E49008F2E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31E44DFB2A614E49008F2E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31E44E052A614EC3008F2E53 /* UIView+WZB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+WZB.swift"; sourceTree = "<group>"; };
+		3763E339A45A558972CEC0A0 /* Pods_UIView_WZB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UIView_WZB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A228B2C06A47F5413C3EF02 /* Pods-UIView-WZB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIView-WZB.debug.xcconfig"; path = "Target Support Files/Pods-UIView-WZB/Pods-UIView-WZB.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B397F22A7F0CC34063D5B1A /* Pods_UIView_WZB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +49,8 @@
 			children = (
 				31E44DEC2A614E47008F2E53 /* UIView-WZB */,
 				31E44DEB2A614E47008F2E53 /* Products */,
+				90A5F59CF5612E4F617D3B68 /* Pods */,
+				9D75352A08983FAA9A6EAC14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +86,24 @@
 			path = "../../../../Source/Swift/UIView+WZB";
 			sourceTree = "<group>";
 		};
+		90A5F59CF5612E4F617D3B68 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A228B2C06A47F5413C3EF02 /* Pods-UIView-WZB.debug.xcconfig */,
+				0AC9AEEB4466E3CD4E153699 /* Pods-UIView-WZB.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9D75352A08983FAA9A6EAC14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3763E339A45A558972CEC0A0 /* Pods_UIView_WZB.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +111,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 31E44DFE2A614E49008F2E53 /* Build configuration list for PBXNativeTarget "UIView-WZB" */;
 			buildPhases = (
+				8D84AA95E5D3CF71846C007E /* [CP] Check Pods Manifest.lock */,
 				31E44DE62A614E47008F2E53 /* Sources */,
 				31E44DE72A614E47008F2E53 /* Frameworks */,
 				31E44DE82A614E47008F2E53 /* Resources */,
+				4F763D3CC0AE9E5DD796FF1E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +171,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4F763D3CC0AE9E5DD796FF1E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UIView-WZB/Pods-UIView-WZB-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UIView-WZB/Pods-UIView-WZB-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UIView-WZB/Pods-UIView-WZB-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D84AA95E5D3CF71846C007E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UIView-WZB-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		31E44DE62A614E47008F2E53 /* Sources */ = {
@@ -295,6 +364,7 @@
 		};
 		31E44DFF2A614E49008F2E53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A228B2C06A47F5413C3EF02 /* Pods-UIView-WZB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -323,6 +393,7 @@
 		};
 		31E44E002A614E49008F2E53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AC9AEEB4466E3CD4E153699 /* Pods-UIView-WZB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
